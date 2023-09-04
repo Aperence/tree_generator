@@ -6,7 +6,7 @@ def generate_tree(path, prefix="|"):
     dirs = []
     files = []
     for filename in os.listdir(path):
-        if filename[0] == ".":
+        if filename[0] == "." or filename[0] == "_":
             continue
         if path != ".":
             f = os.path.join(path, filename)
@@ -19,13 +19,14 @@ def generate_tree(path, prefix="|"):
             dirs.append(f)
 
     for dir in dirs:
-        print(prefix + "---" + dir)
+        dirname = os.path.basename(dir)
+        print(prefix + "---" + dirname)
         generate_tree(dir, prefix + "     |")
         print(prefix)
 
     for file in files:
-        pass
-        print(prefix + "---" + file)
+        filename = os.path.basename(file)
+        print(prefix + "---" + filename)
 
 
 generate_tree(directory)
